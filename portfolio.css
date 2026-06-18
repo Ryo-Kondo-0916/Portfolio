@@ -63,8 +63,6 @@ nav {
 }
 .nav-links a:hover { color:var(--text-1); }
 
-.page-grid { display:none !important; }
-
 .wrap { max-width:1200px; margin:0 auto; padding:0 2.5rem; position:relative; z-index:1; }
 section { padding:7rem 0; border-bottom:1px solid var(--line); }
 

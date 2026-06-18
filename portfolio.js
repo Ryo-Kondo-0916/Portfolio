@@ -54,10 +54,8 @@ document.getElementById('contact-form').addEventListener('submit', function (e) 
       btn.style.color = '';
       btn.disabled = false;
     }, 3000);
-  }).catch((err) => {
-    console.error('EmailJS error:', err);
-    const msg = err?.text || err?.message || JSON.stringify(err);
-    btn.textContent = 'Error: ' + msg;
+  }).catch(() => {
+    btn.textContent = 'Error — try again';
     btn.style.background = '#FF5F57';
     btn.style.color = '#fff';
     setTimeout(() => {
@@ -65,7 +63,21 @@ document.getElementById('contact-form').addEventListener('submit', function (e) 
       btn.style.background = '';
       btn.style.color = '';
       btn.disabled = false;
-    }, 5000);
+    }, 3000);
+  });
+});
+
+document.getElementById('copy-email').addEventListener('click', function (e) {
+  e.preventDefault();
+  navigator.clipboard.writeText('kondo.r@itoq.co.jp').then(() => {
+    const text  = document.getElementById('copy-email-text');
+    const arrow = document.getElementById('copy-email-arrow');
+    text.textContent  = 'コピーしました！';
+    arrow.textContent = '✓';
+    setTimeout(() => {
+      text.textContent  = 'kondo.r@itoq.co.jp';
+      arrow.textContent = '→';
+    }, 2000);
   });
 });
 
