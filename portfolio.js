@@ -89,8 +89,7 @@ document.getElementById('contact-form').addEventListener('submit', function (e) 
 });
 
 // ─── メールコピー ─────────────────────────────────────
-document.getElementById('copy-email').addEventListener('click', function (e) {
-  e.preventDefault();
+document.getElementById('copy-email').addEventListener('click', function () {
   navigator.clipboard.writeText(_email).then(() => {
     const text  = document.getElementById('copy-email-text');
     const arrow = document.getElementById('copy-email-arrow');
@@ -146,13 +145,20 @@ hamburger.addEventListener('click', () => {
   const isOpen = document.body.classList.toggle('nav-open');
   hamburger.setAttribute('aria-expanded', isOpen);
   hamburger.setAttribute('aria-label', isOpen ? 'メニューを閉じる' : 'メニューを開く');
+  document.body.style.overflow = isOpen ? 'hidden' : '';
 });
 
 function closeNav() {
   document.body.classList.remove('nav-open');
   hamburger.setAttribute('aria-expanded', 'false');
   hamburger.setAttribute('aria-label', 'メニューを開く');
+  document.body.style.overflow = '';
 }
+
+// onclick属性を使わずにリスナーで登録（CSP対応）
+document.querySelectorAll('#nav-links a').forEach(link => {
+  link.addEventListener('click', closeNav);
+});
 
 // 画面幅が広がったときにモバイルメニューを閉じる
 window.addEventListener('resize', () => {
