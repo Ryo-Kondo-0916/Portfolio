@@ -19,7 +19,7 @@
 }
 
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior:smooth; font-size:16px; }
+html { scroll-behavior:smooth; font-size:16px; scroll-padding-top:60px; }
 
 body {
   font-family:'Inter', sans-serif;
@@ -33,6 +33,13 @@ body {
 ::-webkit-scrollbar { width:4px; }
 ::-webkit-scrollbar-track { background:var(--bg); }
 ::-webkit-scrollbar-thumb { background:var(--bg-3); border-radius:2px; }
+
+:focus-visible {
+  outline:2px solid var(--cyan);
+  outline-offset:3px;
+  border-radius:var(--r);
+}
+:focus:not(:focus-visible) { outline:none; }
 
 .skip-link {
   position:absolute; top:-100%; left:1rem;
@@ -432,6 +439,10 @@ section { padding:7rem 0; border-bottom:1px solid var(--line); }
 }
 .c-link:hover .c-link-label { color:var(--cyan); }
 .c-link:hover .c-link-arrow { transform:translateX(4px); }
+button.c-link {
+  background:none; border:none; border-top:1px solid var(--line);
+  cursor:pointer; width:100%; font:inherit;
+}
 .c-link-icon {
   width:36px; height:36px; border-radius:6px;
   background:var(--bg-3); border:1px solid var(--line-mid);
@@ -518,21 +529,21 @@ footer {
   section { padding:5rem 0; }
   .hero-stats-row { flex-direction:column; }
   .hero-stat { border-right:none; border-top:1px solid var(--line); padding:1.25rem 1.25rem; }
-}
 
-body.nav-open .nav-links {
-  display:flex; flex-direction:column; gap:0;
-  position:fixed; top:60px; left:0; right:0;
-  background:rgba(8,12,24,0.97);
-  backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--line-mid);
-  z-index:199;
-  padding:0.25rem 0 0.75rem;
-}
-body.nav-open .nav-links li { border-top:1px solid var(--line); }
-body.nav-open .nav-links a {
-  display:block; padding:1rem 1.25rem;
-  font-size:0.9rem; letter-spacing:0.05em;
+  body.nav-open .nav-links {
+    display:flex; flex-direction:column; gap:0;
+    position:fixed; top:60px; left:0; right:0;
+    background:rgba(8,12,24,0.97);
+    backdrop-filter:blur(20px);
+    border-bottom:1px solid var(--line-mid);
+    z-index:199;
+    padding:0.25rem 0 0.75rem;
+  }
+  body.nav-open .nav-links li { border-top:1px solid var(--line); }
+  body.nav-open .nav-links a {
+    display:block; padding:1rem 1.25rem;
+    font-size:0.9rem; letter-spacing:0.05em;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

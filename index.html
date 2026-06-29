@@ -2,6 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src https://api.emailjs.com; base-uri 'self'; form-action 'none';">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ryo Kondo — Full Stack Engineer</title>
 <meta name="description" content="インフラから開発まで一気通貫で動かせるフルスタックエンジニア。C#/.NET・Go・クラウド移行・大規模インフラ移行の実務経験8年以上。">
@@ -26,11 +27,11 @@
   <div class="nav-wrap">
     <a href="#hero" class="nav-logo">ryo<span>.</span>kondo</a>
     <ul class="nav-links" id="nav-links">
-      <li><a href="#about" onclick="closeNav()">About</a></li>
-      <li><a href="#skills" onclick="closeNav()">Skills</a></li>
-      <li><a href="#projects" onclick="closeNav()">Projects</a></li>
-      <li><a href="#experience" onclick="closeNav()">Experience</a></li>
-      <li><a href="#contact" onclick="closeNav()">Contact</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#contact">Contact</a></li>
     </ul>
     <button class="nav-hamburger" id="nav-hamburger" aria-label="メニューを開く" aria-expanded="false" aria-controls="nav-links">
       <span></span><span></span><span></span>
@@ -52,7 +53,7 @@
         </h1>
         <p class="hero-sub">
           <strong>上流〜下流まで一貫対応。</strong>要件定義・インフラ設計から
-          C#/.NET開発・クラウド移行まで、7年以上の実務経験を持つエンジニアです。
+          C#/.NET開発・クラウド移行まで、8年以上の実務経験を持つエンジニアです。
           大規模PJでのテクニカルリードと品質管理が得意領域です。
         </p>
         <div class="hero-btns">
@@ -76,7 +77,7 @@
             <div>&nbsp;&nbsp;<span class="tk">"name"</span><span class="tc">:</span> <span class="tv">"Ryo Kondo"</span><span class="tc">,</span></div>
             <div>&nbsp;&nbsp;<span class="tk">"role"</span><span class="tc">:</span> <span class="tv">"Full Stack Engineer"</span><span class="tc">,</span></div>
             <div>&nbsp;&nbsp;<span class="tk">"location"</span><span class="tc">:</span> <span class="tv">"兵庫県"</span><span class="tc">,</span></div>
-            <div>&nbsp;&nbsp;<span class="tk">"experience"</span><span class="tc">:</span> <span class="ts" id="t-exp">"7+ years"</span><span class="tc">,</span></div>
+            <div>&nbsp;&nbsp;<span class="tk">"experience"</span><span class="tc">:</span> <span class="ts" id="t-exp">"8+ years"</span><span class="tc">,</span></div>
             <div>&nbsp;&nbsp;<span class="tk">"main_stack"</span><span class="tc">: [</span></div>
             <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="tv">"C# / .NET"</span><span class="tc">,</span></div>
             <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="tv">"Windows Infra"</span><span class="tc">,</span></div>
@@ -385,14 +386,14 @@
         <h2 class="contact-hl">一緒に<br><em>働きましょう</em></h2>
         <p class="contact-sub">プロジェクトのご相談・技術的なお問い合わせなど、どんな内容でもお気軽にご連絡ください。通常48時間以内にご返信いたします。</p>
         <div class="contact-links">
-          <a href="#" class="c-link" id="copy-email">
+          <button type="button" class="c-link" id="copy-email" aria-label="メールアドレスをクリップボードにコピー">
             <div class="c-link-icon">📧</div>
             <div>
               <div class="c-link-label">Email</div>
               <div class="c-link-handle" id="copy-email-text"></div>
             </div>
             <span class="c-link-arrow" id="copy-email-arrow">→</span>
-          </a>
+          </button>
           <a href="https://github.com/Ryo-Kondo-0916" target="_blank" rel="noopener noreferrer" class="c-link">
             <div class="c-link-icon">🐙</div>
             <div>
