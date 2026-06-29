@@ -7,11 +7,6 @@ const EJ_TEMPLATE_CONFIRM = 'template_yxay7fq';
 // ryo-kondo-0916.github.io のみに制限してください。
 // ────────────────────────────────────────────────────────
 
-// ─── メールアドレス（ボット対策）───────────────────────
-const _email = atob('a29uZG8uckBpdG9xLmNvLmpw');
-const emailTextEl = document.getElementById('copy-email-text');
-if (emailTextEl) emailTextEl.textContent = _email;
-
 // ─── 年齢・経験年数・フッター年 ───────────────────────
 function calcAge() {
   const b = new Date(1994, 8, 16), t = new Date();
@@ -54,37 +49,24 @@ hamburger.addEventListener('click', function () {
   }
 });
 
-document.querySelectorAll('#nav-links a').forEach(function (link) {
-  link.addEventListener('click', closeNav);
+document.querySelectorAll('#nav-links a').forEach(function(link) {
+  link.addEventListener('click', function(e) {
+    var href = link.getAttribute('href');
+    closeNav();
+    if (href && href.charAt(0) === '#') {
+      e.preventDefault();
+      var target = document.querySelector(href);
+      if (target) {
+        setTimeout(function() {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }, 50);
+      }
+    }
+  });
 });
 
 window.addEventListener('resize', function () {
   if (window.innerWidth > 600) closeNav();
-});
-
-// ─── メールコピー ─────────────────────────────────────
-document.getElementById('copy-email').addEventListener('click', function () {
-  const textEl  = document.getElementById('copy-email-text');
-  const arrowEl = document.getElementById('copy-email-arrow');
-
-  function showFeedback(msg, arrow) {
-    textEl.textContent  = msg;
-    arrowEl.textContent = arrow;
-    setTimeout(function () {
-      textEl.textContent  = _email;
-      arrowEl.textContent = '→';
-    }, 2000);
-  }
-
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(_email).then(function () {
-      showFeedback('コピーしました！', '✓');
-    }).catch(function () {
-      showFeedback('コピー失敗 — 手動でコピーしてください', '!');
-    });
-  } else {
-    showFeedback('コピー失敗 — 手動でコピーしてください', '!');
-  }
 });
 
 // ─── コンタクトフォーム（レート制限付き） ────────────
