@@ -429,7 +429,7 @@ section { padding:7rem 0; border-bottom:1px solid var(--line); }
 }
 .contact-hl em { font-style:normal; color:var(--cyan); }
 .contact-sub { font-size:0.9rem; color:var(--text-2); line-height:1.8; margin-bottom:2rem; }
-.contact-links { display:flex; flex-direction:column; gap:1px; }
+.contact-links { display:flex; flex-direction:column; gap:1px; border-bottom:1px solid var(--line); }
 .c-link {
   display:flex; align-items:center; gap:14px;
   padding:1.1rem 0;
@@ -538,8 +538,9 @@ footer {
   body.nav-open .nav-links li { border-top:1px solid var(--line); }
   body.nav-open .nav-links a {
     display:block; padding:1rem 1.25rem;
-    font-size:0.9rem; letter-spacing:0.05em;
+    font-size:0.8rem; letter-spacing:0.06em; text-transform:uppercase;
   }
+  .hero-stat:first-child { border-top:none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
