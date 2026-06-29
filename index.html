@@ -20,16 +20,21 @@
 </head>
 <body>
 
+<a href="#about" class="skip-link">コンテンツへスキップ</a>
+
 <nav>
   <div class="nav-wrap">
     <a href="#hero" class="nav-logo">ryo<span>.</span>kondo</a>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#contact">Contact</a></li>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#about" onclick="closeNav()">About</a></li>
+      <li><a href="#skills" onclick="closeNav()">Skills</a></li>
+      <li><a href="#projects" onclick="closeNav()">Projects</a></li>
+      <li><a href="#experience" onclick="closeNav()">Experience</a></li>
+      <li><a href="#contact" onclick="closeNav()">Contact</a></li>
     </ul>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="メニューを開く" aria-expanded="false" aria-controls="nav-links">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
 
@@ -87,7 +92,7 @@
 
     <div class="hero-stats-row">
       <div class="hero-stat">
-        <div class="stat-n"><span id="h-exp">7</span><span>+</span></div>
+        <div class="stat-n"><span id="h-exp">8</span><span>+</span></div>
         <div class="stat-l">Years of Experience</div>
       </div>
       <div class="hero-stat">
@@ -333,7 +338,7 @@
     <div class="exp-list">
       <div class="exp-item">
         <div class="exp-meta">
-          <div class="exp-period">2023/07<br>→ 2026/03</div>
+          <div class="exp-period">2023/07<br>→ 現在</div>
           <div class="exp-scale">チーム 約30名<br>PJ 約500名</div>
         </div>
         <div>
@@ -384,11 +389,11 @@
             <div class="c-link-icon">📧</div>
             <div>
               <div class="c-link-label">Email</div>
-              <div class="c-link-handle" id="copy-email-text">kondo.r@itoq.co.jp</div>
+              <div class="c-link-handle" id="copy-email-text"></div>
             </div>
             <span class="c-link-arrow" id="copy-email-arrow">→</span>
           </a>
-          <a href="https://github.com/Ryo-Kondo-0916" target="_blank" rel="noopener" class="c-link">
+          <a href="https://github.com/Ryo-Kondo-0916" target="_blank" rel="noopener noreferrer" class="c-link">
             <div class="c-link-icon">🐙</div>
             <div>
               <div class="c-link-label">GitHub</div>
@@ -400,20 +405,20 @@
       </div>
       <form class="cf" id="contact-form">
         <div class="cf-row">
-          <label class="cf-label">name</label>
-          <input type="text" name="name" class="cf-input" placeholder="山田 太郎" required>
+          <label class="cf-label" for="cf-name">name</label>
+          <input type="text" id="cf-name" name="name" class="cf-input" placeholder="山田 太郎" maxlength="100" required>
         </div>
         <div class="cf-row">
-          <label class="cf-label">email</label>
-          <input type="email" name="email" class="cf-input" placeholder="taro@example.com" required>
+          <label class="cf-label" for="cf-email">email</label>
+          <input type="email" id="cf-email" name="email" class="cf-input" placeholder="taro@example.com" maxlength="200" required>
         </div>
         <div class="cf-row">
-          <label class="cf-label">subject</label>
-          <input type="text" name="subject" class="cf-input" placeholder="お仕事のご相談">
+          <label class="cf-label" for="cf-subject">subject</label>
+          <input type="text" id="cf-subject" name="subject" class="cf-input" placeholder="お仕事のご相談" maxlength="200">
         </div>
         <div class="cf-row">
-          <label class="cf-label">message</label>
-          <textarea name="message" class="cf-ta" placeholder="お気軽にどうぞ..." required></textarea>
+          <label class="cf-label" for="cf-message">message</label>
+          <textarea id="cf-message" name="message" class="cf-ta" placeholder="お気軽にどうぞ..." maxlength="2000" required></textarea>
         </div>
         <button type="submit" class="cf-btn" id="send-btn">Send Message</button>
       </form>
@@ -424,11 +429,11 @@
 <footer>
   <div class="footer-inner">
     <span class="footer-copy">© <span id="fy"></span> Ryo Kondo. All rights reserved.</span>
-    <a href="https://github.com/Ryo-Kondo-0916" target="_blank" rel="noopener" class="footer-link">github.com/Ryo-Kondo-0916</a>
+    <a href="https://github.com/Ryo-Kondo-0916" target="_blank" rel="noopener noreferrer" class="footer-link">github.com/Ryo-Kondo-0916</a>
   </div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js" integrity="sha384-OLBgp1GsljhM2TJ+sbHjaiH9txEUvgdDTAzHv2P24donTt6/529l+9Ua0vFImLlb" crossorigin="anonymous"></script>
 <script src="portfolio.js"></script>
 </body>
 </html>
