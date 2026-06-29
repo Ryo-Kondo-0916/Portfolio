@@ -439,13 +439,6 @@ section { padding:7rem 0; border-bottom:1px solid var(--line); }
 }
 .c-link:hover .c-link-label { color:var(--cyan); }
 .c-link:hover .c-link-arrow { transform:translateX(4px); }
-button.c-link {
-  -webkit-appearance:none; appearance:none;
-  background:transparent; color:inherit;
-  border:none; border-top:1px solid var(--line);
-  cursor:pointer; width:100%; font:inherit;
-  text-align:left; padding:1.1rem 0;
-}
 .c-link-icon {
   width:36px; height:36px; border-radius:6px;
   background:var(--bg-3); border:1px solid var(--line-mid);
