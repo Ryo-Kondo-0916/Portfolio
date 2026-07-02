@@ -478,6 +478,16 @@ section { padding:7rem 0; border-bottom:1px solid var(--line); }
   transition:all 0.2s; letter-spacing:0.01em;
 }
 .cf-btn:hover { background:#33DCFF; transform:translateY(-1px); }
+.cf-btn:disabled {
+  opacity:0.55; cursor:not-allowed;
+  transform:none;
+}
+
+/* ハニーポット（ボット対策）— 視覚・支援技術の双方から隠す */
+.cf-hp {
+  position:absolute; left:-9999px;
+  width:1px; height:1px; overflow:hidden;
+}
 
 footer {
   background:var(--bg);
@@ -544,6 +554,7 @@ footer {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior:auto; }
   .hero-tag-dot,
   .term-cursor { animation:none; }
   *,

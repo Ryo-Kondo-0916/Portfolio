@@ -2,7 +2,8 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="script-src 'self' https://cdn.jsdelivr.net; connect-src https://api.emailjs.com; base-uri 'self';">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src https://api.emailjs.com; object-src 'none'; form-action 'none'; base-uri 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ryo Kondo — Full Stack Engineer</title>
 <meta name="description" content="インフラから開発まで一気通貫で動かせるフルスタックエンジニア。C#/.NET・Go・クラウド移行・大規模インフラ移行の実務経験8年以上。">
@@ -407,11 +408,15 @@
       <form class="cf" id="contact-form">
         <div class="cf-row">
           <label class="cf-label" for="cf-name">name</label>
-          <input type="text" id="cf-name" name="name" class="cf-input" placeholder="山田 太郎" maxlength="100" required>
+          <input type="text" id="cf-name" name="name" class="cf-input" placeholder="山田 太郎" maxlength="100" autocomplete="name" required>
         </div>
         <div class="cf-row">
           <label class="cf-label" for="cf-email">email</label>
-          <input type="email" id="cf-email" name="email" class="cf-input" placeholder="taro@example.com" maxlength="200" required>
+          <input type="email" id="cf-email" name="email" class="cf-input" placeholder="taro@example.com" maxlength="200" autocomplete="email" required>
+        </div>
+        <div class="cf-hp" aria-hidden="true">
+          <label for="cf-website">website</label>
+          <input type="text" id="cf-website" name="website" tabindex="-1" autocomplete="off">
         </div>
         <div class="cf-row">
           <label class="cf-label" for="cf-subject">subject</label>
@@ -421,7 +426,7 @@
           <label class="cf-label" for="cf-message">message</label>
           <textarea id="cf-message" name="message" class="cf-ta" placeholder="お気軽にどうぞ..." maxlength="2000" required></textarea>
         </div>
-        <button type="submit" class="cf-btn" id="send-btn">Send Message</button>
+        <button type="submit" class="cf-btn" id="send-btn" aria-live="polite">Send Message</button>
       </form>
     </div>
   </div>
