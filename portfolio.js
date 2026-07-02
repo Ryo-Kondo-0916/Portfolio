@@ -7,6 +7,9 @@ const EJ_TEMPLATE_CONFIRM = 'template_yxay7fq';
 // ryo-kondo-0916.github.io のみに制限してください。
 // ────────────────────────────────────────────────────────
 
+// ─── ユーザー設定：視差効果を減らす ───────────────────
+var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 // ─── 年齢・経験年数・フッター年 ───────────────────────
 function calcAge() {
   const b = new Date(1994, 8, 16), t = new Date();
@@ -58,7 +61,7 @@ document.querySelectorAll('#nav-links a').forEach(function(link) {
       var target = document.querySelector(href);
       if (target) {
         setTimeout(function() {
-          target.scrollIntoView({ behavior: 'smooth' });
+          target.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth' });
         }, 50);
       }
     }
@@ -67,6 +70,22 @@ document.querySelectorAll('#nav-links a').forEach(function(link) {
 
 window.addEventListener('resize', function () {
   if (window.innerWidth > 600) closeNav();
+});
+
+// Escape キーで閉じる
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape' && document.body.classList.contains('nav-open')) {
+    closeNav();
+    hamburger.focus();
+  }
+});
+
+// メニュー外タップで閉じる
+document.addEventListener('click', function (e) {
+  if (document.body.classList.contains('nav-open') &&
+      !e.target.closest('nav')) {
+    closeNav();
+  }
 });
 
 // ─── コンタクトフォーム（レート制限付き） ────────────
@@ -97,11 +116,20 @@ document.getElementById('contact-form').addEventListener('submit', function (e) 
     return;
   }
 
-  const fd      = new FormData(e.target);
-  const name    = fd.get('name');
-  const email   = fd.get('email');
-  const subject = fd.get('subject') || 'ポートフォリオからのお問い合わせ';
-  const message = fd.get('message');
+  const fd = new FormData(e.target);
+
+  // ハニーポット：ボットが埋めたら送信せず成功したように見せる
+  if ((fd.get('website') || '').trim() !== '') {
+    e.target.reset();
+    return;
+  }
+
+  const name    = (fd.get('name')    || '').trim();
+  const email   = (fd.get('email')   || '').trim();
+  const subject = (fd.get('subject') || '').trim() || 'ポートフォリオからのお問い合わせ';
+  const message = (fd.get('message') || '').trim();
+
+  if (!name || !email || !message) return;
 
   btn.textContent = 'Sending...';
   btn.disabled = true;
@@ -144,8 +172,6 @@ try {
 }
 
 // ─── スクロールアニメーション（reduced-motion 対応）───
-var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
 if (!prefersReducedMotion) {
   var io = new IntersectionObserver(function (entries) {
     entries.forEach(function (en) {
