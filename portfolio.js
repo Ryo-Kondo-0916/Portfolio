@@ -10,6 +10,15 @@ const EJ_TEMPLATE_CONFIRM = 'template_yxay7fq';
 // ─── ユーザー設定：視差効果を減らす ───────────────────
 var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+// ─── メールリンク（ボット対策：HTML に平文を置かない）─
+(function () {
+  var addr = atob('a29uZG8uckBpdG9xLmNvLmpw');
+  var link = document.getElementById('email-link');
+  var handle = document.getElementById('email-handle');
+  if (link) link.setAttribute('href', 'mailto:' + addr);
+  if (handle) handle.textContent = addr;
+})();
+
 // ─── 年齢・経験年数・フッター年 ───────────────────────
 function calcAge() {
   const b = new Date(1994, 8, 16), t = new Date();
