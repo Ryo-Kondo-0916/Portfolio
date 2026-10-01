@@ -2,444 +2,270 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src https://api.emailjs.com; object-src 'none'; form-action 'none'; base-uri 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src https://api.emailjs.com https://www.google.com/recaptcha/; frame-src https://www.google.com/recaptcha/ https://recaptcha.google.com/recaptcha/; object-src 'none'; form-action 'none'; base-uri 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ryo Kondo — Full Stack Engineer</title>
-<meta name="description" content="インフラから開発まで一気通貫で動かせるフルスタックエンジニア。C#/.NET・Go・クラウド移行・大規模インフラ移行の実務経験8年以上。">
+<title>Ryo Kondo｜インフラと開発のエンジニア</title>
+<meta name="description" content="兵庫県のエンジニア、近藤のポートフォリオ。2017年から、C# / .NET・Goの開発とWindowsインフラ・クラウド移行の両方に携わっています。">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Ryo Kondo — Full Stack Engineer">
-<meta property="og:description" content="インフラから開発まで一気通貫で動かせるフルスタックエンジニア。C#/.NET・Go・クラウド移行・大規模インフラ移行の実務経験8年以上。">
+<meta property="og:title" content="Ryo Kondo｜インフラと開発のエンジニア">
+<meta property="og:description" content="2017年から、C# / .NET・Goの開発とWindowsインフラ・クラウド移行の両方に携わっています。">
 <meta property="og:url" content="https://ryo-kondo-0916.github.io/">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Ryo Kondo — Full Stack Engineer">
-<meta name="twitter:description" content="インフラから開発まで一気通貫で動かせるフルスタックエンジニア。C#/.NET・Go・クラウド移行の実務経験8年以上。">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<meta name="twitter:title" content="Ryo Kondo｜インフラと開発のエンジニア">
+<meta name="twitter:description" content="2017年から、C# / .NET・Goの開発とWindowsインフラ・クラウド移行の両方に携わっています。">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M10 100V45a40 40 0 0 1 80 0v55z' fill='%231F2A44'/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="portfolio.css">
 </head>
 <body>
 
-<a href="#about" class="skip-link">コンテンツへスキップ</a>
-
-<nav>
-  <div class="nav-wrap">
-    <a href="#hero" class="nav-logo">ryo<span>.</span>kondo</a>
-    <ul class="nav-links" id="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-    <button class="nav-hamburger" id="nav-hamburger" aria-label="メニューを開く" aria-expanded="false" aria-controls="nav-links">
-      <span></span><span></span><span></span>
-    </button>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a href="#top" class="logo">Ryo Kondo</a>
+    <nav aria-label="ページ内リンク">
+      <ul class="nav-links">
+        <li><a href="#about">自己紹介</a></li>
+        <li><a href="#career">経歴</a></li>
+        <li><a href="#works">主な仕事</a></li>
+        <li><a href="#skills">スキル</a></li>
+        <li><a href="#contact">お問い合わせ</a></li>
+      </ul>
+    </nav>
   </div>
-</nav>
+</header>
 
-<section id="hero">
-  <div class="hero-bg"></div>
-  <div class="wrap" style="width:100%">
-    <div class="hero-wrap">
-      <div>
-        <div class="hero-tag">
-          <span class="hero-tag-dot"></span>
-          Full Stack Engineer — Infrastructure &amp; Development
-        </div>
-        <h1 class="hero-name">
-          Ryo<br><em>Kondo</em>
-        </h1>
-        <p class="hero-sub">
-          <strong>上流〜下流まで一貫対応。</strong>要件定義・インフラ設計から
-          C#/.NET開発・クラウド移行まで、8年以上の実務経験を持つエンジニアです。
-          大規模PJでのテクニカルリードと品質管理が得意領域です。
-        </p>
-        <div class="hero-btns">
-          <a href="#projects" class="btn btn-cyan">View Projects</a>
-          <a href="#contact" class="btn btn-ghost">Get in Touch</a>
-        </div>
-      </div>
+<main id="top">
 
-      <div class="hero-right">
-<div class="hero-terminal">
-          <div class="term-bar">
-            <div class="term-dot" style="background:#FF5F57"></div>
-            <div class="term-dot" style="background:#FEBC2E"></div>
-            <div class="term-dot" style="background:#28C840"></div>
-            <span class="term-title">kondo.profile</span>
-          </div>
-          <div class="term-body">
-            <div><span class="tc">// </span><span class="tp">profile</span><span class="tc">.json</span></div>
-            <div>&nbsp;</div>
-            <div><span class="tc">{</span></div>
-            <div>&nbsp;&nbsp;<span class="tk">"name"</span><span class="tc">:</span> <span class="tv">"Ryo Kondo"</span><span class="tc">,</span></div>
-            <div>&nbsp;&nbsp;<span class="tk">"role"</span><span class="tc">:</span> <span class="tv">"Full Stack Engineer"</span><span class="tc">,</span></div>
-            <div>&nbsp;&nbsp;<span class="tk">"location"</span><span class="tc">:</span> <span class="tv">"兵庫県"</span><span class="tc">,</span></div>
-            <div>&nbsp;&nbsp;<span class="tk">"experience"</span><span class="tc">:</span> <span class="ts" id="t-exp">"8+ years"</span><span class="tc">,</span></div>
-            <div>&nbsp;&nbsp;<span class="tk">"main_stack"</span><span class="tc">: [</span></div>
-            <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="tv">"C# / .NET"</span><span class="tc">,</span></div>
-            <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="tv">"Windows Infra"</span><span class="tc">,</span></div>
-            <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="tv">"SQL Server"</span><span class="tc">,</span></div>
-            <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="tv">"Go / GCP"</span></div>
-            <div>&nbsp;&nbsp;<span class="tc">],</span></div>
-            <div>&nbsp;&nbsp;<span class="tk">"available"</span><span class="tc">:</span> <span class="ts">false</span></div>
-            <div><span class="tc">}</span><span class="term-cursor"></span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="hero-stats-row">
-      <div class="hero-stat">
-        <div class="stat-n"><span id="h-exp">8</span><span>+</span></div>
-        <div class="stat-l">Years of Experience</div>
-      </div>
-      <div class="hero-stat">
-        <div class="stat-n">13</div>
-        <div class="stat-l">Projects Delivered</div>
-      </div>
-      <div class="hero-stat">
-        <div class="stat-n">500<span>+</span></div>
-        <div class="stat-l">Scale Migration (members)</div>
-      </div>
-      <div class="hero-stat">
-        <div class="stat-n" id="h-age">–</div>
-        <div class="stat-l">Years Old</div>
+<section class="hero">
+  <div class="wrap hero-inner">
+    <figure class="hero-photo">
+      <img src="profile.jpg" width="1100" height="1113" alt="紺のジャケットを着た近藤の写真">
+    </figure>
+    <div class="hero-text">
+      <p class="hero-hello">はじめまして、近藤です。</p>
+      <h1 class="hero-title">インフラと開発、<br>どちらの話も<br>一緒に進められます。</h1>
+      <p class="hero-lead">兵庫県のエンジニアです。要件定義・インフラ設計から、C# / .NETの開発、クラウド移行まで、<span id="exp-years">7</span>年以上の実務で上流から下流まで担当してきました。大規模なプロジェクトでのテクニカルリードと、品質管理が得意です。</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-primary">相談してみる</a>
+        <a href="#career" class="btn btn-quiet">経歴を見る</a>
       </div>
     </div>
   </div>
 </section>
 
-<section id="about">
+<section id="about" class="section section-beige">
+  <div class="wrap about-grid">
+    <div class="about-body">
+      <h2 class="section-title">自己紹介</h2>
+      <p class="about-lead">インフラから開発まで、一気通貫で動かせるエンジニアです。</p>
+      <p>保険会社向けの500名規模のOS移行プロジェクトでは、サブリーダーとしてテクニカルリードを担いました。Microsoftや外部ベンダーとの技術照会の窓口を務め、移行品質の向上に貢献しています。</p>
+      <p>設計書・テスト仕様書のレビューから工程管理まで担い、品質と納期の両立を徹底してきました。C# / .NETをはじめ、Go・SQL・VBScript・RPAなど幅広い技術で実績があります。</p>
+      <p>GCPやAzureといったクラウド環境での開発経験もあり、新しい技術のキャッチアップを続けています。</p>
+    </div>
+    <dl class="facts">
+      <div><dt>拠点</dt><dd>兵庫県（常駐・リモートどちらも可）</dd></div>
+      <div><dt>実務経験</dt><dd><span id="exp-years-2">7</span>年以上（2017年〜）</dd></div>
+      <div><dt>案件数</dt><dd>13件</dd></div>
+      <div><dt>年齢</dt><dd><span id="age">–</span>歳</dd></div>
+      <div><dt>学歴</dt><dd>専門学校卒</dd></div>
+      <div><dt>資格</dt><dd>ORACLE MASTER Bronze 11g</dd></div>
+      <div><dt>国籍</dt><dd>日本</dd></div>
+      <div><dt>現在の状況</dt><dd>現在は募集していません</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section id="career" class="section">
+  <div class="wrap narrow">
+    <h2 class="section-title">経歴</h2>
+    <ol class="timeline">
+      <li class="tl-item">
+        <p class="tl-period">2023年7月〜現在</p>
+        <h3 class="tl-role">サブリーダー／インフラ・端末エンジニア</h3>
+        <p class="tl-org">保険会社向け Windows 10 → 11 OS移行（チーム約30名、プロジェクト約500名）</p>
+        <p class="tl-desc">要件定義から運用保守まで全工程を担当。アプリの非互換リスク分析・改修・テスト、PowerShell/VBScriptによる自動化、テスト計画・仕様書の策定を主導しました。Microsoftなどベンダーとの技術照会の窓口を務め、チーム全成果物の一次レビューも行いました。</p>
+      </li>
+      <li class="tl-item">
+        <p class="tl-period">2021年6月〜2023年6月</p>
+        <h3 class="tl-role">エンジニア／C# / .NET・Go開発</h3>
+        <p class="tl-org">物流会計システムのモダナイズ、GCPバックエンド開発 ほか</p>
+        <p class="tl-desc">2023年1月〜6月は、物流向け会計システムのC# / .NETリニューアル（スクラム）と、AWSからGCPへの移行に伴うGoのRESTful API実装を続けて担当（チーム5名）。詳細設計から単体・結合テストまで自走し、コードレビューも行いました。</p>
+      </li>
+      <li class="tl-item">
+        <p class="tl-period">2019年11月〜2021年5月</p>
+        <h3 class="tl-role">エンジニア／RPA・インフラ・C#開発</h3>
+        <p class="tl-org">医療RPA開発、食品メーカーの基幹系移行 ほか</p>
+      </li>
+      <li class="tl-item">
+        <p class="tl-period">2017年8月〜2019年10月</p>
+        <h3 class="tl-role">エンジニア／C# / .NET・SQL開発</h3>
+        <p class="tl-org">購買システムの新規開発、社内講師 ほか</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section id="works" class="section section-beige">
   <div class="wrap">
-    <div class="eyebrow">About</div>
-    <div class="about-grid">
-      <div class="about-body">
-        <p class="about-lead">
-          インフラから開発まで<mark>一気通貫</mark>で<br>動かせるエンジニア。
-        </p>
-        <p>保険会社向け500名規模のOS移行PJではサブリーダーとしてテクニカルリードを担い、Microsoft・外部ベンダーとの技術照会窓口として移行品質の向上に貢献しました。</p>
-        <p>設計書・テスト仕様書のレビューから工程管理まで担い、品質と納期の両立を徹底。C#/.NETをはじめ、Go・SQL・VBScript・RPAなど幅広い技術スタックに対応した実績があります。</p>
-        <p>GCPやAzureといったクラウド環境での開発経験も有し、新技術のキャッチアップを継続しています。</p>
-        <table class="profile-table">
-          <tr><td>location</td><td>兵庫県（常駐・リモートどちらも可）</td></tr>
-          <tr><td>education</td><td>専門学校卒</td></tr>
-          <tr><td>cert</td><td>ORACLE MASTER BRONZE 11g</td></tr>
-          <tr><td>nationality</td><td>日本</td></tr>
-          <tr><td>status</td><td>現在募集していない</td></tr>
-        </table>
-      </div>
-      <div class="timeline-panel">
-        <div class="tl-title">Career Timeline</div>
-        <div class="tl-list">
-          <div class="tl-item">
-            <div class="tl-year">2023/07<br>→ 現在</div>
-            <div>
-              <div class="tl-role">サブリーダー / インフラ・端末エンジニア</div>
-              <div class="tl-org">保険会社向け Win10→Win11 OS移行（500名規模）</div>
-            </div>
-          </div>
-          <div class="tl-item">
-            <div class="tl-year">2021/06<br>→ 2023/06</div>
-            <div>
-              <div class="tl-role">エンジニア / C# .NET・Go開発</div>
-              <div class="tl-org">物流会計モダナイズ・GCPバックエンド開発 ほか</div>
-            </div>
-          </div>
-          <div class="tl-item">
-            <div class="tl-year">2019/11<br>→ 2021/05</div>
-            <div>
-              <div class="tl-role">エンジニア / RPA・インフラ・C#開発</div>
-              <div class="tl-org">医療RPA開発、食品メーカー基幹系移行 ほか</div>
-            </div>
-          </div>
-          <div class="tl-item">
-            <div class="tl-year">2017/08<br>→ 2019/10</div>
-            <div>
-              <div class="tl-role">エンジニア / C#.NET・SQL開発</div>
-              <div class="tl-org">購買システム新規開発、社内講師 ほか</div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <h2 class="section-title">主な仕事</h2>
+    <div class="works">
+      <article class="work work-feature">
+        <p class="work-kind">インフラ／OS移行</p>
+        <h3 class="work-title">保険会社向け Windows 10 → 11 大規模OS移行</h3>
+        <p>500名規模のOS移行でサブリーダーを担当。アプリの非互換リスク分析から改修・テストまで一貫して進めました。Microsoftやベンダーとの技術照会で仕様を早めに解消し、移行トラブルを未然に防いでいます。テスト計画・仕様書の策定を主導し、全工程で品質を担保しました。</p>
+        <ul class="tags"><li>Windows 11</li><li>SASE（クラウド型セキュリティ）</li><li>ID管理基盤</li><li>PowerShell</li><li>VBScript</li><li>ウォーターフォール</li></ul>
+      </article>
+      <article class="work">
+        <p class="work-kind">C# / .NET モダナイズ</p>
+        <h3 class="work-title">物流業界向け会計システムのリニューアル</h3>
+        <p>既存システムをWindows Formsアプリへ刷新。スクラムで詳細設計から単体テストまでをスプリント単位で進め、他メンバーのコードレビューも担当して品質基準を保ちました。</p>
+        <ul class="tags"><li>C# / .NET</li><li>Windows Forms</li><li>スクラム</li></ul>
+      </article>
+      <article class="work">
+        <p class="work-kind">クラウド移行／Go API</p>
+        <h3 class="work-title">AWS → GCP 移行に伴う RESTful API 開発</h3>
+        <p>Go 1.19でバックエンドAPIを製造し、単体〜結合テストで品質を担保。GitHubのプルリクエストを軸にした開発で、仕様変更にも素早く対応しました。</p>
+        <ul class="tags"><li>Go 1.19</li><li>Google Cloud</li><li>GitHub</li><li>スクラム</li></ul>
+      </article>
+      <article class="work">
+        <p class="work-kind">C# UWP／WebRTC</p>
+        <h3 class="work-title">教育機関向け Web講義システムのネイティブアプリ化</h3>
+        <p>PHP/JSのWebシステムをC#（UWP）のアプリへ再構築。WebRTCで低遅延の映像・音声配信を実装し、Windows 10/11での動作検証を徹底しました。</p>
+        <ul class="tags"><li>C# UWP</li><li>WebRTC</li><li>JSON</li><li>Visual Studio</li></ul>
+      </article>
     </div>
   </div>
 </section>
 
-<section id="skills">
+<section id="skills" class="section">
   <div class="wrap">
-    <div class="eyebrow">Skills</div>
-    <h2 class="s-title">技術<em>スタック</em></h2>
-    <div class="skills-layout">
-      <nav class="skills-nav" aria-label="スキルカテゴリ">
-        <a class="skills-nav-item active" href="#sk-lang">lang</a>
-        <a class="skills-nav-item" href="#sk-infra">infra</a>
-        <a class="skills-nav-item" href="#sk-db">database</a>
-        <a class="skills-nav-item" href="#sk-cloud">cloud</a>
-        <a class="skills-nav-item" href="#sk-tools">tools</a>
-        <a class="skills-nav-item" href="#sk-process">process</a>
-      </nav>
-      <div class="skills-panels">
-        <div class="skill-block" id="sk-lang">
-          <div class="skill-block-head">
-            <div class="skill-icon" style="background:rgba(0,212,255,0.1)">💻</div>
-            <div class="skill-block-title">開発言語</div>
-          </div>
-          <div class="skill-block-body">
-            <span class="pill pill-cyan">C# / .NET</span>
-            <span class="pill pill-exp">3年以上</span>
-            <span class="pill pill-cyan">SQL</span>
-            <span class="pill pill-exp">3年以上</span>
-            <span class="pill pill-cyan">Go（ver.1.19）</span>
-            <span class="pill pill-exp">実務経験あり</span>
-            <span class="pill pill-cyan">VBScript</span>
-            <span class="pill pill-exp">2年未満</span>
-            <span class="pill pill-cyan">Windows Batch</span>
-            <span class="pill pill-cyan">PowerShell</span>
-            <span class="pill pill-grey">Java</span>
-            <span class="pill pill-grey">HTML / CSS / JS</span>
-          </div>
-        </div>
-        <div class="skill-block" id="sk-infra">
-          <div class="skill-block-head">
-            <div class="skill-icon" style="background:rgba(255,181,71,0.1)">🖥️</div>
-            <div class="skill-block-title">インフラ / OS</div>
-          </div>
-          <div class="skill-block-body">
-            <span class="pill pill-amber">Windows 10 / 11</span>
-            <span class="pill pill-amber">Windows Server</span>
-            <span class="pill pill-amber">Active Directory</span>
-            <span class="pill pill-amber">Microsoft EntraID</span>
-            <span class="pill pill-amber">SASE / ZScaler</span>
-            <span class="pill pill-amber">Linux</span>
-            <span class="pill pill-grey">VMware vCenter</span>
-            <span class="pill pill-grey">JP1 / AJS</span>
-          </div>
-        </div>
-        <div class="skill-block" id="sk-db">
-          <div class="skill-block-head">
-            <div class="skill-icon" style="background:rgba(0,229,160,0.1)">🗄️</div>
-            <div class="skill-block-title">データベース</div>
-          </div>
-          <div class="skill-block-body">
-            <span class="pill pill-green">SQL Server</span>
-            <span class="pill pill-exp">3年以上</span>
-            <span class="pill pill-grey">Oracle DB</span>
-            <span class="pill pill-exp">調べながら可</span>
-          </div>
-        </div>
-        <div class="skill-block" id="sk-cloud">
-          <div class="skill-block-head">
-            <div class="skill-icon" style="background:rgba(155,127,255,0.1)">☁️</div>
-            <div class="skill-block-title">クラウド</div>
-          </div>
-          <div class="skill-block-body">
-            <span class="pill pill-purple">Google Cloud（GCP）</span>
-            <span class="pill pill-purple">Azure</span>
-            <span class="pill pill-grey">AWS（前任環境）</span>
-          </div>
-        </div>
-        <div class="skill-block" id="sk-tools">
-          <div class="skill-block-head">
-            <div class="skill-icon" style="background:rgba(255,255,255,0.05)">🔧</div>
-            <div class="skill-block-title">ツール</div>
-          </div>
-          <div class="skill-block-body">
-            <span class="pill pill-grey">Git / GitHub</span>
-            <span class="pill pill-grey">SVN</span>
-            <span class="pill pill-grey">Visual Studio</span>
-            <span class="pill pill-grey">Microsoft Office</span>
-            <span class="pill pill-grey">RPA（WinActor）</span>
-          </div>
-        </div>
-        <div class="skill-block" id="sk-process">
-          <div class="skill-block-head">
-            <div class="skill-icon" style="background:rgba(255,181,71,0.06)">📐</div>
-            <div class="skill-block-title">開発手法 / プロセス</div>
-          </div>
-          <div class="skill-block-body">
-            <span class="pill pill-amber">ウォーターフォール</span>
-            <span class="pill pill-amber">スクラム / アジャイル</span>
-            <span class="pill pill-amber">テクニカルリード</span>
-            <span class="pill pill-amber">成果物レビュー</span>
-            <span class="pill pill-amber">UML設計</span>
-            <span class="pill pill-amber">テスト計画策定</span>
-          </div>
-        </div>
+    <h2 class="section-title">スキル</h2>
+    <p class="section-note">濃い文字は実務での使用経験が長いもの、薄い文字は経験の浅いもの・補助的に使ったものです。</p>
+    <div class="skills">
+      <div class="skill-group">
+        <h3>開発言語</h3>
+        <ul>
+          <li class="main">C# / .NET<small>3年以上</small></li>
+          <li class="main">SQL<small>3年以上</small></li>
+          <li class="main">Go（1.19）<small>実務経験あり</small></li>
+          <li class="main">VBScript<small>2年未満</small></li>
+          <li class="main">Windows Batch</li>
+          <li class="main">PowerShell</li>
+          <li>Java</li>
+          <li>HTML / CSS / JavaScript</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h3>インフラ・OS</h3>
+        <ul>
+          <li class="main">Windows 10 / 11</li>
+          <li class="main">Windows Server</li>
+          <li class="main">Active Directory</li>
+          <li class="main">Microsoft Entra ID</li>
+          <li class="main">SASE / ZScaler</li>
+          <li class="main">Linux</li>
+          <li>VMware vCenter</li>
+          <li>JP1 / AJS</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h3>データベース</h3>
+        <ul>
+          <li class="main">SQL Server<small>3年以上</small></li>
+          <li>Oracle Database<small>調べながら可</small></li>
+        </ul>
+        <h3>クラウド</h3>
+        <ul>
+          <li class="main">Google Cloud</li>
+          <li class="main">Azure</li>
+          <li>AWS（前任環境）</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h3>進め方</h3>
+        <ul>
+          <li class="main">ウォーターフォール</li>
+          <li class="main">スクラム／アジャイル</li>
+          <li class="main">テクニカルリード</li>
+          <li class="main">成果物レビュー</li>
+          <li class="main">UML設計</li>
+          <li class="main">テスト計画の策定</li>
+        </ul>
+        <h3>ツール</h3>
+        <ul>
+          <li>Git / GitHub</li>
+          <li>SVN</li>
+          <li>Visual Studio</li>
+          <li>Microsoft Office</li>
+          <li>RPA（WinActor）</li>
+        </ul>
       </div>
     </div>
   </div>
 </section>
 
-<section id="projects">
-  <div class="wrap">
-    <div class="eyebrow">Projects</div>
-    <h2 class="s-title">主要<em>プロジェクト</em></h2>
-    <div class="projects-grid">
-      <div class="proj-card">
-        <div class="proj-num">01</div>
-        <div class="proj-cat">Infrastructure / OS Migration</div>
-        <div class="proj-title">保険会社向け<br>Win10→Win11 大規模OS移行</div>
-        <p class="proj-desc">500名規模のOS移行PJにてサブリーダーを担当。アプリ非互換リスク分析〜改修・テストまで一貫推進。Microsoft・ベンダーとの技術照会窓口として仕様を早期解消し、移行トラブルを未然防止。テスト計画・仕様書策定を主導し全フェーズで品質を担保した。</p>
-        <div class="proj-tags">
-          <span class="proj-tag">Windows 11</span>
-          <span class="proj-tag">ZScaler / SASE</span>
-          <span class="proj-tag">EntraID</span>
-          <span class="proj-tag">PowerShell</span>
-          <span class="proj-tag">VBScript</span>
-          <span class="proj-tag">WF開発</span>
-        </div>
-      </div>
-      <div class="proj-card">
-        <div class="proj-num">02</div>
-        <div class="proj-cat">C# / .NET Modernization</div>
-        <div class="proj-title">物流業界向け会計システム<br>C# モダナイズ</div>
-        <p class="proj-desc">既存システムをWindows Formsアプリへリニューアル。スクラム開発において詳細設計から単体テストまでをスプリント単位で実行。他メンバーのコードレビューも担当し、短い開発サイクルの中でも品質基準を維持した。</p>
-        <div class="proj-tags">
-          <span class="proj-tag">C# .NET</span>
-          <span class="proj-tag">Windows Forms</span>
-          <span class="proj-tag">Scrum</span>
-        </div>
-      </div>
-      <div class="proj-card">
-        <div class="proj-num">03</div>
-        <div class="proj-cat">Cloud Migration / Go API</div>
-        <div class="proj-title">AWS→GCP移行<br>Go言語 RESTful API開発</div>
-        <p class="proj-desc">AWSからGoogle Cloudへの大規模移行に伴うバックエンドAPI実装。Go（ver.1.19）を用いた高パフォーマンスRESTful APIを製造し、単体〜結合テストで品質を担保。GitHub PRベースの開発フローで迅速な仕様変更にも対応した。</p>
-        <div class="proj-tags">
-          <span class="proj-tag">Go 1.19</span>
-          <span class="proj-tag">Google Cloud</span>
-          <span class="proj-tag">GitHub</span>
-          <span class="proj-tag">RESTful API</span>
-          <span class="proj-tag">Scrum</span>
-        </div>
-      </div>
-      <div class="proj-card">
-        <div class="proj-num">04</div>
-        <div class="proj-cat">C# UWP / WebRTC</div>
-        <div class="proj-title">教育機関向け Web講義システム<br>ネイティブアプリ リプレイス</div>
-        <p class="proj-desc">PHP/JSベースWebシステムをC#（UWP）ネイティブアプリへ再構築。WebRTCで低遅延リアルタイム動画・音声配信機能を実装。Win10/Win11クロス環境での動作検証を徹底し、本番運用に耐える品質を担保した。</p>
-        <div class="proj-tags">
-          <span class="proj-tag">C# UWP</span>
-          <span class="proj-tag">WebRTC</span>
-          <span class="proj-tag">JSON</span>
-          <span class="proj-tag">Visual Studio</span>
-        </div>
-      </div>
+<section id="contact" class="section section-beige">
+  <div class="wrap contact-grid">
+    <div class="contact-intro">
+      <h2 class="section-title">お問い合わせ</h2>
+      <p>プロジェクトのご相談や技術的なご質問など、内容を問わずお気軽にご連絡ください。通常48時間以内にお返事します。</p>
+      <ul class="contact-links">
+        <li>
+          <span class="contact-label">メール</span>
+          <button type="button" class="copy-btn" id="copy-email">
+            <span id="copy-email-text">メールアドレスを表示するにはJavaScriptを有効にしてください</span>
+            <span class="copy-hint" id="copy-email-hint">コピー</span>
+          </button>
+        </li>
+        <li>
+          <span class="contact-label">GitHub</span>
+          <a href="https://github.com/Ryo-Kondo-0916" target="_blank" rel="noopener">Ryo-Kondo-0916</a>
+        </li>
+      </ul>
     </div>
+    <form class="form" id="contact-form">
+      <div class="field">
+        <label for="f-name">お名前</label>
+        <input id="f-name" type="text" name="name" placeholder="山田 太郎" autocomplete="name" required>
+      </div>
+      <div class="field">
+        <label for="f-email">メールアドレス</label>
+        <input id="f-email" type="email" name="email" placeholder="taro@example.com" autocomplete="email" required>
+      </div>
+      <div class="field">
+        <label for="f-subject">件名<span class="optional">（任意）</span></label>
+        <input id="f-subject" type="text" name="subject" placeholder="お仕事のご相談">
+      </div>
+      <div class="field">
+        <label for="f-message">内容</label>
+        <textarea id="f-message" name="message" rows="6" placeholder="ご相談内容をご記入ください" required></textarea>
+      </div>
+      <!-- ボット対策のハニーポット。人には見えず、入力されていたら送信しない -->
+      <div class="hp-field" aria-hidden="true">
+        <label for="f-website">website</label>
+        <input id="f-website" type="text" name="website" tabindex="-1" autocomplete="off">
+      </div>
+      <div class="captcha" id="captcha"></div>
+      <button type="submit" class="btn btn-primary" id="send-btn">送信する</button>
+      <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+    </form>
   </div>
 </section>
 
-<section id="experience">
-  <div class="wrap">
-    <div class="eyebrow">Experience</div>
-    <h2 class="s-title">職歴<em>（直近）</em></h2>
-    <div class="exp-list">
-      <div class="exp-item">
-        <div class="exp-meta">
-          <div class="exp-period">2023/07<br>→ 現在</div>
-          <div class="exp-scale">チーム 約30名<br>PJ 約500名</div>
-        </div>
-        <div>
-          <div class="exp-role">インフラ・端末エンジニア / サブリーダー</div>
-          <div class="exp-org">保険会社向け OS移行プロジェクト</div>
-          <p class="exp-desc">Win10からWin11へのリニューアル対応。要件定義〜運用保守まで全フェーズを担当。アプリ非互換リスク分析・改修・テスト、PowerShell/VBSによる自動化実装、テスト計画・仕様書の策定を主導。Microsoft社等ベンダーとの技術照会窓口を担い、チーム全成果物の一次レビューも実施した。</p>
-          <div class="exp-pills">
-            <span class="pill pill-cyan">Windows 11</span>
-            <span class="pill pill-cyan">SASE / ZScaler</span>
-            <span class="pill pill-cyan">Microsoft EntraID</span>
-            <span class="pill pill-cyan">PowerShell</span>
-            <span class="pill pill-cyan">VBScript</span>
-            <span class="pill pill-grey">ウォーターフォール</span>
-          </div>
-        </div>
-      </div>
-      <div class="exp-item">
-        <div class="exp-meta">
-          <div class="exp-period">2023/01<br>→ 2023/06</div>
-          <div class="exp-scale">チーム 5名</div>
-        </div>
-        <div>
-          <div class="exp-role">フルスタックエンジニア（C# / Go）</div>
-          <div class="exp-org">物流業界会計システムモダナイズ・GCP移行API開発</div>
-          <p class="exp-desc">物流向け会計システムのC#.NETリニューアル（スクラム開発）と、AWSからGCPへの移行に伴うGo言語RESTful API実装を連続して担当。詳細設計から単体・結合テストまでを自走し、コードレビューも実施した。</p>
-          <div class="exp-pills">
-            <span class="pill pill-cyan">C# .NET</span>
-            <span class="pill pill-cyan">Go 1.19</span>
-            <span class="pill pill-purple">Google Cloud</span>
-            <span class="pill pill-grey">GitHub</span>
-            <span class="pill pill-grey">スクラム開発</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+</main>
 
-<section id="contact">
-  <div class="wrap">
-    <div class="eyebrow">Contact</div>
-    <div class="contact-split">
-      <div>
-        <h2 class="contact-hl">一緒に<br><em>働きましょう</em></h2>
-        <p class="contact-sub">プロジェクトのご相談・技術的なお問い合わせなど、どんな内容でもお気軽にご連絡ください。通常48時間以内にご返信いたします。</p>
-        <div class="contact-links">
-          <a href="#contact" class="c-link" id="email-link">
-            <div class="c-link-icon">📧</div>
-            <div>
-              <div class="c-link-label">Email</div>
-              <div class="c-link-handle" id="email-handle"></div>
-            </div>
-            <span class="c-link-arrow">→</span>
-          </a>
-          <a href="https://github.com/Ryo-Kondo-0916" target="_blank" rel="noopener noreferrer" class="c-link">
-            <div class="c-link-icon">🐙</div>
-            <div>
-              <div class="c-link-label">GitHub</div>
-              <div class="c-link-handle">Ryo-Kondo-0916</div>
-            </div>
-            <span class="c-link-arrow">→</span>
-          </a>
-        </div>
-      </div>
-      <form class="cf" id="contact-form">
-        <div class="cf-row">
-          <label class="cf-label" for="cf-name">name</label>
-          <input type="text" id="cf-name" name="name" class="cf-input" placeholder="山田 太郎" maxlength="100" autocomplete="name" required>
-        </div>
-        <div class="cf-row">
-          <label class="cf-label" for="cf-email">email</label>
-          <input type="email" id="cf-email" name="email" class="cf-input" placeholder="taro@example.com" maxlength="200" autocomplete="email" required>
-        </div>
-        <div class="cf-hp" aria-hidden="true">
-          <label for="cf-website">website</label>
-          <input type="text" id="cf-website" name="website" tabindex="-1" autocomplete="off">
-        </div>
-        <div class="cf-row">
-          <label class="cf-label" for="cf-subject">subject</label>
-          <input type="text" id="cf-subject" name="subject" class="cf-input" placeholder="お仕事のご相談" maxlength="200">
-        </div>
-        <div class="cf-row">
-          <label class="cf-label" for="cf-message">message</label>
-          <textarea id="cf-message" name="message" class="cf-ta" placeholder="お気軽にどうぞ..." maxlength="2000" required></textarea>
-        </div>
-        <button type="submit" class="cf-btn" id="send-btn" aria-live="polite">Send Message</button>
-      </form>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="footer-inner">
-    <span class="footer-copy">© <span id="fy"></span> Ryo Kondo. All rights reserved.</span>
-    <a href="https://github.com/Ryo-Kondo-0916" target="_blank" rel="noopener noreferrer" class="footer-link">github.com/Ryo-Kondo-0916</a>
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <span>© <span id="fy"></span> Ryo Kondo</span>
+    <a href="https://github.com/Ryo-Kondo-0916" target="_blank" rel="noopener">github.com/Ryo-Kondo-0916</a>
   </div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js" crossorigin="anonymous"></script>
+<!-- 版の固定とSRIハッシュは必ずセットで変える（ハッシュ不一致だと読み込まれない） -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4.4.1/dist/email.min.js" integrity="sha384-SALc35EccAf6RzGw4iNsyj7kTPr33K7RoGzYu+7heZhT8s0GZouafRiCg1qy44AS" crossorigin="anonymous"></script>
 <script src="portfolio.js"></script>
 </body>
 </html>

@@ -1,215 +1,161 @@
 // ─── EmailJS 設定 ──────────────────────────────────────
+// EmailJS の管理画面で、Domains の許可リストを公開URLのドメインだけにしてください。
 const EJ_PUBLIC_KEY       = 'jp-46tMB3qEvifupo';
 const EJ_SERVICE_ID       = 'service_mm08v06';
 const EJ_TEMPLATE_NOTIFY  = 'template_noqldqf';
 const EJ_TEMPLATE_CONFIRM = 'template_yxay7fq';
-// EmailJS ダッシュボードで Allowed Origins を
-// ryo-kondo-0916.github.io のみに制限してください。
+
+// ─── reCAPTCHA v2 設定 ─────────────────────────────────
+// 自動返信は入力された任意のアドレスへ送られるため、reCAPTCHA を通った送信だけに限る。
+// サイトキーを空にすると、自動返信を送らず近藤宛ての通知だけを送る。
+// 設定手順：Google でサイトキーを発行 → 下に貼る → EmailJS で自動返信テンプレートの
+// Settings タブにある「Enable reCAPTCHA V2 verification」をオンにし、シークレットキーを登録する。
+const RECAPTCHA_SITE_KEY = '6LchBNktAAAAANQBaT11kJJkPcVYwdsIRBKiF9D_';
 // ────────────────────────────────────────────────────────
 
-// ─── ユーザー設定：視差効果を減らす ───────────────────
-var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const SEND_COOLDOWN_MS = 60000;
 
-// ─── メールリンク（ボット対策：HTML に平文を置かない）─
-(function () {
-  var addr = atob('a29uZG8uckBpdG9xLmNvLmpw');
-  var link = document.getElementById('email-link');
-  var handle = document.getElementById('email-handle');
-  if (link) link.setAttribute('href', 'mailto:' + addr);
-  if (handle) handle.textContent = addr;
-})();
+// ボット対策：HTML に平文で置かない
+const EMAIL = atob('a29uZG8uckBpdG9xLmNvLmpw');
 
-// ─── 年齢・経験年数・フッター年 ───────────────────────
+// 生年月日をコードに残さないため、生まれた年と月だけで計算する。
+// 誕生月の1日に年齢が上がるので、誕生日より最大で半月ほど早く切り替わる。
+const BIRTH_YEAR  = 1994;
+const BIRTH_MONTH = 9;
+
 function calcAge() {
-  const b = new Date(1994, 8, 16), t = new Date();
-  let a = t.getFullYear() - b.getFullYear();
-  if (t.getMonth() - b.getMonth() < 0 ||
-     (t.getMonth() === b.getMonth() && t.getDate() < b.getDate())) a--;
+  const t = new Date();
+  let a = t.getFullYear() - BIRTH_YEAR;
+  if (t.getMonth() + 1 < BIRTH_MONTH) a--;
   return a;
 }
+
 function calcExp() {
   const s = new Date(2017, 7, 1), t = new Date();
   return Math.floor((t - s) / (1000 * 60 * 60 * 24 * 365.25));
 }
-const age = calcAge(), exp = calcExp();
-document.getElementById('h-age').textContent = age;
-document.getElementById('h-exp').textContent = exp;
-document.getElementById('t-exp').textContent = '"' + exp + '+ years"';
+
+const exp = calcExp();
+document.getElementById('age').textContent = calcAge();
+document.getElementById('exp-years').textContent = exp;
+document.getElementById('exp-years-2').textContent = exp;
 document.getElementById('fy').textContent = new Date().getFullYear();
+document.getElementById('copy-email-text').textContent = EMAIL;
 
-// ─── ハンバーガーメニュー ─────────────────────────────
-const hamburger = document.getElementById('nav-hamburger');
+// ─── reCAPTCHA ─────────────────────────────────────────
+let captchaWidgetId = null;
 
-function openNav() {
-  document.body.classList.add('nav-open');
-  hamburger.setAttribute('aria-expanded', 'true');
-  hamburger.setAttribute('aria-label', 'メニューを閉じる');
-  document.body.style.overflow = 'hidden';
+window.onRecaptchaLoad = function () {
+  captchaWidgetId = grecaptcha.render('captcha', { sitekey: RECAPTCHA_SITE_KEY });
+};
+
+if (RECAPTCHA_SITE_KEY) {
+  const s = document.createElement('script');
+  s.src = 'https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoad&render=explicit&hl=ja';
+  s.async = true;
+  document.head.appendChild(s);
 }
-function closeNav() {
-  document.body.classList.remove('nav-open');
-  hamburger.setAttribute('aria-expanded', 'false');
-  hamburger.setAttribute('aria-label', 'メニューを開く');
-  document.body.style.overflow = '';
+
+function captchaToken() {
+  if (captchaWidgetId === null) return '';
+  return grecaptcha.getResponse(captchaWidgetId);
 }
 
-hamburger.addEventListener('click', function () {
-  if (document.body.classList.contains('nav-open')) {
-    closeNav();
-  } else {
-    openNav();
-  }
-});
+function resetCaptcha() {
+  if (captchaWidgetId !== null) grecaptcha.reset(captchaWidgetId);
+}
 
-document.querySelectorAll('#nav-links a').forEach(function(link) {
-  link.addEventListener('click', function(e) {
-    var href = link.getAttribute('href');
-    closeNav();
-    if (href && href.charAt(0) === '#') {
-      e.preventDefault();
-      var target = document.querySelector(href);
-      if (target) {
-        setTimeout(function() {
-          target.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth' });
-        }, 50);
-      }
-    }
-  });
-});
-
-window.addEventListener('resize', function () {
-  if (window.innerWidth > 600) closeNav();
-});
-
-// Escape キーで閉じる
-document.addEventListener('keydown', function (e) {
-  if (e.key === 'Escape' && document.body.classList.contains('nav-open')) {
-    closeNav();
-    hamburger.focus();
-  }
-});
-
-// メニュー外タップで閉じる
-document.addEventListener('click', function (e) {
-  if (document.body.classList.contains('nav-open') &&
-      !e.target.closest('nav')) {
-    closeNav();
-  }
-});
-
-// ─── コンタクトフォーム（レート制限付き） ────────────
+// ─── お問い合わせフォーム ───────────────────────────────
+const form   = document.getElementById('contact-form');
+const btn    = document.getElementById('send-btn');
+const status = document.getElementById('form-status');
 let lastSentAt = 0;
-const SEND_COOLDOWN_MS = 60000;
 
-document.getElementById('contact-form').addEventListener('submit', function (e) {
-  e.preventDefault();
-
-  const btn = document.getElementById('send-btn');
-  const now = Date.now();
-
-  if (now - lastSentAt < SEND_COOLDOWN_MS) {
-    const remaining = Math.ceil((SEND_COOLDOWN_MS - (now - lastSentAt)) / 1000);
-    btn.textContent = remaining + '秒後に再送信できます';
-    return;
-  }
-
-  if (typeof emailjs === 'undefined') {
-    btn.textContent = 'Error — メールサービス利用不可';
-    btn.style.background = '#FF5F57';
-    btn.style.color = '#fff';
-    setTimeout(function () {
-      btn.textContent = 'Send Message';
-      btn.style.background = '';
-      btn.style.color = '';
-    }, 3000);
-    return;
-  }
-
-  const fd = new FormData(e.target);
-
-  // ハニーポット：ボットが埋めたら送信せず成功したように見せる
-  if ((fd.get('website') || '').trim() !== '') {
-    e.target.reset();
-    return;
-  }
-
-  const name    = (fd.get('name')    || '').trim();
-  const email   = (fd.get('email')   || '').trim();
-  const subject = (fd.get('subject') || '').trim() || 'ポートフォリオからのお問い合わせ';
-  const message = (fd.get('message') || '').trim();
-
-  if (!name || !email || !message) return;
-
-  btn.textContent = 'Sending...';
-  btn.disabled = true;
-
-  const params = { from_name: name, from_email: email, email: email, subject: subject, message: message };
-
-  Promise.all([
-    emailjs.send(EJ_SERVICE_ID, EJ_TEMPLATE_NOTIFY,  params),
-    emailjs.send(EJ_SERVICE_ID, EJ_TEMPLATE_CONFIRM, Object.assign({}, params, { to_email: email })),
-  ]).then(function () {
-    lastSentAt = Date.now();
-    btn.textContent = '✓ Sent!';
-    btn.style.background = '#00E5A0';
-    btn.style.color = '#000';
-    e.target.reset();
-    setTimeout(function () {
-      btn.textContent = 'Send Message';
-      btn.style.background = '';
-      btn.style.color = '';
-      btn.disabled = false;
-    }, 3000);
-  }).catch(function () {
-    btn.textContent = 'Error — try again';
-    btn.style.background = '#FF5F57';
-    btn.style.color = '#fff';
-    setTimeout(function () {
-      btn.textContent = 'Send Message';
-      btn.style.background = '';
-      btn.style.color = '';
-      btn.disabled = false;
-    }, 3000);
-  });
-});
-
-// ─── EmailJS 初期化（他の機能に影響しないよう最後に実行）
 try {
   if (typeof emailjs !== 'undefined') emailjs.init(EJ_PUBLIC_KEY);
 } catch (err) {
-  // EmailJS 初期化失敗時はフォームのみ無効になる
+  console.error('EmailJS の初期化に失敗しました', err);
 }
 
-// ─── スクロールアニメーション（reduced-motion 対応）───
-if (!prefersReducedMotion) {
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (en) {
-      if (en.isIntersecting) {
-        en.target.style.opacity = '1';
-        en.target.style.transform = 'translateY(0)';
-      }
-    });
-  }, { threshold: 0.08 });
-
-  document.querySelectorAll('.proj-card,.exp-item,.skill-block,.tl-item').forEach(function (el) {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(18px)';
-    el.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
-    io.observe(el);
-  });
+function showStatus(text, kind) {
+  status.textContent = text;
+  status.className = 'form-status' + (kind ? ' is-' + kind : '');
 }
 
-// ─── スキルナビ ハイライト ────────────────────────────
-var sNavItems = document.querySelectorAll('.skills-nav-item');
-var sObs = new IntersectionObserver(function (entries) {
-  entries.forEach(function (en) {
-    if (en.isIntersecting) {
-      var id = '#' + en.target.id;
-      sNavItems.forEach(function (a) {
-        a.classList.toggle('active', a.getAttribute('href') === id);
-      });
-    }
-  });
-}, { threshold: 0.6 });
+function sendMail(fields, token) {
+  const params = {
+    from_name: fields.name, from_email: fields.email, email: fields.email,
+    subject: fields.subject, message: fields.message,
+  };
+  const jobs = [emailjs.send(EJ_SERVICE_ID, EJ_TEMPLATE_NOTIFY, params)];
+  if (token) {
+    jobs.push(emailjs.send(EJ_SERVICE_ID, EJ_TEMPLATE_CONFIRM,
+      { ...params, to_email: fields.email, 'g-recaptcha-response': token }));
+  }
+  return Promise.all(jobs);
+}
 
-document.querySelectorAll('.skill-block').forEach(function (b) { sObs.observe(b); });
+form.addEventListener('submit', function (e) {
+  e.preventDefault();
+
+  const wait = SEND_COOLDOWN_MS - (Date.now() - lastSentAt);
+  if (wait > 0) {
+    showStatus(Math.ceil(wait / 1000) + '秒後に再送信できます。', 'error');
+    return;
+  }
+  if (typeof emailjs === 'undefined') {
+    showStatus('送信機能を読み込めませんでした。' + EMAIL + ' へ直接ご連絡ください。', 'error');
+    return;
+  }
+
+  const fd = new FormData(form);
+  // ハニーポット：ボットが埋めたら送らず、送れたように見せる
+  if ((fd.get('website') || '').trim() !== '') {
+    form.reset();
+    showStatus('送信しました。', 'ok');
+    return;
+  }
+
+  const fields = {
+    name:    (fd.get('name')    || '').trim(),
+    email:   (fd.get('email')   || '').trim(),
+    subject: (fd.get('subject') || '').trim() || 'ポートフォリオからのお問い合わせ',
+    message: (fd.get('message') || '').trim(),
+  };
+  if (!fields.name || !fields.email || !fields.message) {
+    showStatus('お名前・メールアドレス・内容を入力してください。', 'error');
+    return;
+  }
+
+  const token = captchaToken();
+  if (RECAPTCHA_SITE_KEY && !token) {
+    showStatus('「私はロボットではありません」にチェックを入れてください。', 'error');
+    return;
+  }
+
+  btn.textContent = '送信しています…';
+  btn.disabled = true;
+  showStatus('', '');
+
+  sendMail(fields, token).then(() => {
+    lastSentAt = Date.now();
+    form.reset();
+    showStatus(token ? '送信しました。確認メールをお送りしています。' : '送信しました。', 'ok');
+  }).catch(() => {
+    showStatus('送信できませんでした。時間をおいて再度お試しいただくか、' + EMAIL + ' へ直接ご連絡ください。', 'error');
+  }).finally(() => {
+    resetCaptcha();
+    btn.textContent = '送信する';
+    btn.disabled = false;
+  });
+});
+
+document.getElementById('copy-email').addEventListener('click', function () {
+  const hint = document.getElementById('copy-email-hint');
+  navigator.clipboard.writeText(EMAIL).then(() => {
+    hint.textContent = 'コピーしました';
+    setTimeout(() => { hint.textContent = 'コピー'; }, 2000);
+  }).catch(() => {
+    window.location.href = 'mailto:' + EMAIL;
+  });
+});
