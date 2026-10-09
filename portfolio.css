@@ -238,7 +238,6 @@ ul, ol { list-style: none; }
   color: var(--faint);
 }
 .skill-group li.main { color: var(--navy); font-weight: 500; }
-.skill-group small { font-size: 0.78rem; color: var(--muted); font-weight: 400; white-space: nowrap; }
 
 /* ── お問い合わせ ───────────────────── */
 .contact-grid {
@@ -319,3 +318,12 @@ ul, ol { list-style: none; }
   width: 1px; height: 1px; overflow: hidden;
 }
 .captcha:empty { display: none; }
+
+/* 画面には出さず、スクリーンリーダーにだけ読ませる */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0); clip-path: inset(50%);
+  white-space: nowrap;
+}

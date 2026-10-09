@@ -14,6 +14,7 @@ const RECAPTCHA_SITE_KEY = '6LchBNktAAAAANQBaT11kJJkPcVYwdsIRBKiF9D_';
 // ────────────────────────────────────────────────────────
 
 const SEND_COOLDOWN_MS = 60000;
+const CAPTCHA_TIMEOUT_MS = 10000;
 
 // ボット対策：HTML に平文で置かない
 const EMAIL = atob('a29uZG8uckBpdG9xLmNvLmpw');
@@ -44,16 +45,28 @@ document.getElementById('copy-email-text').textContent = EMAIL;
 
 // ─── reCAPTCHA ─────────────────────────────────────────
 let captchaWidgetId = null;
+// 広告ブロッカーなどで reCAPTCHA が読めないと、チェックを付けられず送信できなくなるため検知する
+let captchaFailed = false;
 
 window.onRecaptchaLoad = function () {
-  captchaWidgetId = grecaptcha.render('captcha', { sitekey: RECAPTCHA_SITE_KEY });
+  try {
+    captchaWidgetId = grecaptcha.render('captcha', { sitekey: RECAPTCHA_SITE_KEY });
+  } catch (err) {
+    captchaFailed = true;
+    console.error('reCAPTCHA の表示に失敗しました', err);
+  }
 };
 
 if (RECAPTCHA_SITE_KEY) {
   const s = document.createElement('script');
   s.src = 'https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoad&render=explicit&hl=ja';
   s.async = true;
+  s.onerror = function () { captchaFailed = true; };
   document.head.appendChild(s);
+  // api.js が読めても、その先の読み込みが止まると onerror も onload も来ないため、時間で見切る
+  setTimeout(function () {
+    if (captchaWidgetId === null) captchaFailed = true;
+  }, CAPTCHA_TIMEOUT_MS);
 }
 
 function captchaToken() {
@@ -127,6 +140,13 @@ form.addEventListener('submit', function (e) {
     return;
   }
 
+  if (RECAPTCHA_SITE_KEY && captchaWidgetId === null) {
+    showStatus(captchaFailed
+      ? 'ロボット確認（reCAPTCHA）を読み込めませんでした。' + EMAIL + ' へ直接ご連絡ください。'
+      : 'ロボット確認（reCAPTCHA）を読み込んでいます。少し待ってから再度お試しください。', 'error');
+    return;
+  }
+
   const token = captchaToken();
   if (RECAPTCHA_SITE_KEY && !token) {
     showStatus('「私はロボットではありません」にチェックを入れてください。', 'error');
@@ -152,9 +172,15 @@ form.addEventListener('submit', function (e) {
 
 document.getElementById('copy-email').addEventListener('click', function () {
   const hint = document.getElementById('copy-email-hint');
+  // ボタンの中の変化は読み上げられないことがあるため、ボタンの外の status で知らせる
+  const announce = document.getElementById('copy-email-status');
   navigator.clipboard.writeText(EMAIL).then(() => {
     hint.textContent = 'コピーしました';
-    setTimeout(() => { hint.textContent = 'コピー'; }, 2000);
+    announce.textContent = 'メールアドレスをコピーしました';
+    setTimeout(() => {
+      hint.textContent = 'コピー';
+      announce.textContent = '';
+    }, 2000);
   }).catch(() => {
     window.location.href = 'mailto:' + EMAIL;
   });
